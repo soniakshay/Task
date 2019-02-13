@@ -1,0 +1,128 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <title>LMS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script>
+      class User{
+
+        constructor()
+        {
+        }
+
+        getuser(uname,pwd){
+
+
+          let promise=new Promise(function(resolve,reject){
+            fetch("https://api.myjson.com/bins/t5zcg").then(function(res){
+              resolve(res);
+            }).catch(function(e){
+              reject(new Error("Not Receiving Response "));
+            }); 
+           })
+          .then(function(response){
+            let data=response.json();
+            data.then(function(data1){
+              for(let  i in data1)
+              {
+                if(uname==data1[i].uname && pwd==data1[i].pwd)
+                {
+                   localStorage.setItem("uname", data1[i].uname);
+                   window.location.href = 'home.html'; 
+                }
+
+              }
+
+
+            });
+
+          }).catch(function(e){
+            console.log(e);
+          });
+
+
+
+
+
+
+
+
+        }
+
+
+
+      }
+
+      function login(){
+      
+          let uname=document.getElementById("usr").value;
+          let pwd=document.getElementById("pwd").value;
+
+          let user = new User();
+          user.getuser(uname,pwd);
+      
+        return false;
+
+      }
+      function check()
+      {
+        let uname=localStorage.getItem("uname");
+        if(uname != null){
+              window.location.href = 'home.html'; 
+
+        }
+      }
+
+    </script>
+
+
+
+    <style>
+    html,body
+    {
+      margin:0px;
+      padding:0px;
+      background-color:#DCDCDC ;
+
+    }
+    #loginD
+    {
+      width:100%
+    }
+  </style>
+</head>
+<body onload="check()">
+
+  <div id="loginD" style="margin-top:7%;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 "></div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 " style="padding:10px;background-color: white;box-shadow: 0px 10px 10px;">
+          <h1 style="color:#5bc0de;">Login</h1>
+          <hr style="background-color:#5bc0de;;color:red;height:1px;"/>
+          <form>
+            <div class="form-group">
+              <label for="usr">User Name:</label>
+              <input type="text" class="form-control" id="usr" style="font-size:30px;height:50px;">
+            </div>
+            <div class="form-group">
+              <label for="pwd">Password:</label>
+              <input type="Password" class="form-control" id="pwd" style="font-size:30px;height:50px;">
+            </div>
+            <input type="button" class="btn btn-info btn-block" style="font-size:20px;"  onclick="login()" value="Login">
+          </form>
+
+
+        </div>
+        <div class="col-lg-3 col-md-3 "></div>
+        
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

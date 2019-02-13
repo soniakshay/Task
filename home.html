@@ -1,0 +1,54 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <title>LMS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script>
+      function checkUserLoginOrNot()
+      {
+        let uname=localStorage.getItem("uname");
+        if(uname == null){
+              window.location.href = 'index.html'; 
+
+        }
+      }    
+    </script>
+
+
+
+    <style>
+    html,body
+    {
+      margin:0px;
+      padding:0px;
+      background-color:#DCDCDC ;
+
+    }
+    #loginD
+    {
+      width:100%
+    }
+    #header
+    {
+      width:100%;
+      position:fixed;
+      background: white;
+    }
+  </style>
+</head>
+<body onload="checkUserLoginOrNot()">
+  <div id="header">
+    <div class="container-fluid">
+      <span style="font-size: 30px;">
+          <i class="fas fa-bars"></i>
+      </span>
+    </div>
+
+  </div>
+</body>
+</html>
