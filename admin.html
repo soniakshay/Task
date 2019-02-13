@@ -1,0 +1,319 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <title>LMS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="lodash.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script type="text/javascript" src="User.js"></script>
+    <script type="text/javascript" src="coman.js"></script>
+    <script type="text/javascript" src="course.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("#AddParticiateli").click(function(){
+          $(".itemcontainer").hide();
+          $("#AddParticiateD").fadeIn();
+		onloadcallfunc();
+        });  
+
+        $("#Removeparticipateli").click(function(){
+          $(".itemcontainer").hide();
+          $("#RemoveparticipateD").fadeIn();
+	onloadcallfunc();
+        }); 
+
+        $("#Addcourseli").click(function(){
+          $(".itemcontainer").hide();
+          $("#AddcourseD").fadeIn();
+	onloadcallfunc();
+        }); 
+         $("#RemoveCourseli").click(function(){
+          $(".itemcontainer").hide();
+          $("#RemoveCourseD").fadeIn();
+	onloadcallfunc();
+        }); 
+        
+      });
+
+
+
+
+      let menuflag=0;
+      $(document).ready(function(){
+       $("#menuicon").click(function(){
+        if(menuflag==0)
+        {
+          $("#slidemenu").css({"left": "0px","transition" : "1s"});
+          menuflag=1;
+        }
+        else
+        {
+          $("#slidemenu").css({"left": "-250px","transition" : "1s"});
+          menuflag=0;
+
+        }
+      });
+     });
+
+      function onloadcallfunc(){
+        checkuser();
+        loaduserdata();
+        loadcoursedata();
+        if(uname== null)
+        {
+         window.location.href="index.html";
+       }
+     }
+
+     function AddUser()
+     {
+      let name=document.getElementById("name").value;
+      let uname=document.getElementById("username").value;
+      let pwd=document.getElementById("pwd").value;
+      let admintype=document.getElementById("adminonot");
+      if(admintype.checked)
+      {
+        let user=new User();
+        user.Adduser(name,uname,pwd,"admin");
+      }
+      else
+      {
+       let user=new User();
+       user.Adduser(name,uname,pwd,"participate");
+       
+
+     }
+   }
+
+ </script>
+
+
+
+ <style>
+ html,body
+ {
+  margin:0px;
+  padding:0px;
+  background-color:#DCDCDC ;
+
+}
+#loginD
+{
+  width:100%
+}
+#header
+{
+  width:100%;
+  position:fixed;
+  padding:30px;
+  background: white;
+  z-index:2;
+}
+#slidemenu
+{
+  height:100%;
+  background:white;
+  top: 94px;
+  left:-250px;
+  z-index: 2;
+  position:fixed;
+}
+ul
+{
+  margin:0px;
+  padding:0px;
+  list-style-type: none;
+  text-align: center;
+
+}
+#slidemenu ul li
+{
+  font-size:20px;
+  padding:30px;
+}
+#slidemenu ul li:hover
+{
+
+
+  background:#339CFF;
+  color:white;  
+}
+#AddParticiateD-container
+{
+  background: white;
+  padding:20px;
+}
+.title
+{
+  font-size: 30px;
+}
+.form-control
+{
+  font-size: 20px;
+  height: 50px;
+}
+.itemcontainer
+{
+  display:none;
+}
+
+</style>
+</head>
+<body onload="onloadcallfunc()">
+  <div id="header">
+    <div class="container-fluid">
+      <span style="font-size: 30px;" id="menuicon">
+        <i class="fas fa-bars"></i>
+      </span>
+    </div>
+  </div>
+
+  <div id="slidemenu">
+    <ul id="menuitem">
+      <li id="AddParticiateli">Add Participate</li>
+      <li id="Removeparticipateli">Remove Participate</li>
+      <li id="Addcourseli">Add Course</li>
+      <li id="RemoveCourseli">Remove Course</li>
+      <li>Assign Course</li>
+    </ul>     
+  </div>
+
+
+  <div id="maincontainer" style="padding-top: 10%; z-index: 1">
+
+    <!-- AddParticiateD -->
+    <div id="AddParticiateD" class="itemcontainer">
+      <div class="container">
+        <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0">
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
+          <div id="AddParticiateD-container" ">
+            <h2 class="title">Add Participate</h2>
+            <hr/>
+            <form>
+              <div class="form-group">
+                <label for="usr">Name:</label>
+                <input type="text" class="form-control" id="name">
+              </div>
+              <div class="form-group">
+                <label for="usr">User Name:</label>
+                <input type="text" class="form-control" id="username">
+              </div>
+              <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="pwd">
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" id="adminonot">Admin or Not</label>
+              </div>
+              <button type="button" class="btn btn-primary btn-block" style="font-size:20px;" onclick=" AddUser()">Add Participte</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0 ">
+        </div>
+      </div>
+    </div>
+
+    <div id="RemoveparticipateD" class="itemcontainer" >
+      <div class="container">
+        <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0">
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
+          <div id="AddParticiateD-container" ">
+            <h2 class="title">Romove Participate</h2>
+            <hr/>
+            <div class="table-responsive">   
+              <table class="table">
+               <thead>
+                 <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Username</th>
+                  <th>Password</th>
+                  <th>Remove</th>
+                </tr>
+              </thead>
+              <tbody id="tablebody">
+                
+              </tbody>
+            </table>
+          </div>  
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0 ">
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- AddParticiateD -->
+  <div id="AddcourseD" class="itemcontainer">
+    <div class="container">
+      <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0">
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
+        <div id="AddParticiateD-container" ">
+          <h2 class="title">Add Course</h2>
+          <hr/>
+          <form>
+            <div class="form-group">
+              <label for="coursetitle">Title</label>
+              <input type="text" class="form-control" id="coursetitle">
+            </div>
+            <div class="form-group">
+              <label for="coursediscription">Discription:</label>
+              <textarea class="form-control" rows="5" id="coursediscription"></textarea> 
+            </div>
+            <button type="button" class="btn btn-primary btn-block" style="font-size:20px;" onclick="Addcourse()">Add Course</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0 ">
+      </div>
+    </div>
+  </div>
+
+  <div id="RemoveCourseD" class="itemcontainer">
+    <div class="container">
+      <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0">
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
+        <div id="AddParticiateD-container" ">
+          <h2 class="title">Romove Course</h2>
+          <hr/>
+          <div class="table-responsive">   
+            <table class="table">
+             <thead>
+               <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Discription</th>
+                <th>Remove</th>
+              </tr>
+            </thead>
+            <tbody id="coursetablebody">
+              
+            </tbody>
+          </table>
+        </div>  
+      </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0 ">
+    </div>
+  </div>
+
+
+
+
+
+
+</div>
+</body>
+</html>
