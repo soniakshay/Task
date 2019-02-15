@@ -1,0 +1,136 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <title>LMS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="lodash.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script type="text/javascript" src="coman.js"></script>
+    <script type="text/javascript" src="User.js"></script>
+    <script type="text/javascript" src="course.js"></script>
+    <script type="text/javascript" src="participate.js"></script>
+    <style> 
+    html,body
+    {
+      margin:0px;
+       padding:0px;
+      background-color:#DCDCDC ;
+
+    }
+
+#header
+{
+  width:100%;
+  position:fixed;
+  padding:30px;
+  background: white;
+  z-index:2;
+}
+#slidemenu
+{
+  height:100%;
+  background:white;
+  top: 94px;
+  left:-250px;
+  z-index: 2;
+  position:fixed;
+}
+ul
+{
+  margin:0px;
+  padding:0px;
+  list-style-type: none;
+  text-align: center;
+
+}
+#slidemenu ul li
+{
+  font-size:20px;
+  padding:30px;
+}
+#slidemenu ul li:hover
+{
+
+
+  background:#339CFF;
+  color:white;  
+}
+.innercoursebox
+{
+  height:250px;
+  background: white;
+  margin-left: 5px;
+}
+
+</style>
+<script >
+   let menuflag=0;
+      $(document).ready(function(){
+       $("#menuicon").click(function(){
+        if(menuflag==0)
+        {
+          $("#slidemenu").css({"left": "0px","transition" : "1s"});
+          menuflag=1;
+        }
+        else
+        {
+          $("#slidemenu").css({"left": "-250px","transition" : "1s"});
+          menuflag=0;
+
+        }
+      });
+     });
+
+
+      function onloadcallfunc()
+      {
+        checkornotParticipate();
+        loadcourseforuser();
+
+      }
+</script>
+</head>
+<body onload="onloadcallfunc()">
+  <div id="header">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+          <span style="font-size: 30px;" id="menuicon">
+            <i class="fas fa-bars"></i>
+          </span>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+         <div id="logo" style="margin-left:35%;">
+          <img src="logo.png" height="50px" width="50px">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="slidemenu">
+  <ul id="menuitem">
+    <li id="AddParticiateli">Add Participate</li>
+    <li id="Removeparticipateli">Remove Participate</li>
+    <li id="Addcourseli">Add Course</li>
+    <li id="RemoveCourseli">Remove Course</li>
+    <li id="AssignCourseli">Assign Course</li>
+  </ul>     
+</div>
+
+
+<div id="maincontainer" style="padding-top: 10%; z-index: 1">
+    <div class="container" id="coursescontainer">
+      
+    </div>
+
+</div>
+
+</body>
+</html>
